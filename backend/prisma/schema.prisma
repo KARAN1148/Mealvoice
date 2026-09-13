@@ -1,0 +1,266 @@
+// MealVoice Food - Prisma Database Schema (SQLite compatible — no enums)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  phone        String
+  role         String   @default("CUSTOMER")
+  // Roles: CUSTOMER | CALL_AGENT | RESTAURANT_ADMIN | RIDER | OPERATIONS_ADMIN | SUPER_ADMIN
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  customer    Customer?
+  rider       Rider?
+  restaurants Restaurant[]
+  agentCalls  CallRecord[] @relation("AgentCalls")
+  notifications Notification[]
+}
+
+model Customer {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  preferredLanguage String   @default("English")
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  addresses      Address[]
+  orders         Order[]
+  callRecords    CallRecord[]
+  reviews        Review[]
+  supportTickets SupportTicket[]
+}
+
+model Address {
+  id         String   @id @default(uuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  label      String   @default("Home")
+  street     String
+  landmark   String?
+  city       String   @default("Bengaluru")
+  zipcode    String   @default("560001")
+  lat        Float    @default(12.9716)
+  lng        Float    @default(77.5946)
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Restaurant {
+  id           String   @id @default(uuid())
+  name         String
+  cuisine      String
+  rating       Float    @default(4.5)
+  reviewCount  Int      @default(120)
+  deliveryTime String   @default("30-40 mins")
+  deliveryFee  Float    @default(30.0)
+  minOrder     Float    @default(100.0)
+  address      String
+  phone        String
+  isVegOnly    Boolean  @default(false)
+  isOpen       Boolean  @default(true)
+  imageUrl     String
+  ownerId      String?
+  owner        User?    @relation(fields: [ownerId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  categories MenuCategory[]
+  items      MenuItem[]
+  orders     Order[]
+  reviews    Review[]
+}
+
+model MenuCategory {
+  id           String     @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  name         String
+  sortOrder    Int        @default(0)
+  items        MenuItem[]
+}
+
+model MenuItem {
+  id           String       @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  categoryId   String
+  category     MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name         String
+  description  String
+  price        Float
+  isVeg        Boolean      @default(true)
+  isAvailable  Boolean      @default(true)
+  imageUrl     String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  orderItems OrderItem[]
+}
+
+model Order {
+  id                  String   @id @default(uuid())
+  orderNumber         String   @unique
+  // source: ONLINE | PHONE_CALL | EASY_ORDER | AGENT
+  source              String   @default("ONLINE")
+  // status: PENDING | CONFIRMED | PREPARING | READY_FOR_PICKUP | ASSIGNED | RIDER_ACCEPTED | AT_RESTAURANT | PICKED_UP | OUT_FOR_DELIVERY | DELIVERED | CANCELLED
+  status              String   @default("PENDING")
+  subtotal            Float
+  deliveryFee         Float
+  tax                 Float
+  discount            Float    @default(0.0)
+  totalAmount         Float
+  // paymentMethod: COD | MOCK_UPI | MOCK_CARD
+  paymentMethod       String   @default("COD")
+  // paymentStatus: PENDING | PAID | FAILED | REFUNDED
+  paymentStatus       String   @default("PENDING")
+  deliveryAddress     String
+  landmark            String?
+  specialInstructions String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  customerId   String
+  customer     Customer @relation(fields: [customerId], references: [id])
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+
+  items          OrderItem[]
+  statusHistory  OrderStatusHistory[]
+  delivery       Delivery?
+  payment        Payment?
+  callRecord     CallRecord?
+  reviews        Review[]
+  supportTickets SupportTicket[]
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId String
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  name       String
+  price      Float
+  quantity   Int
+}
+
+model OrderStatusHistory {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    String
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model Rider {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicleType   String   @default("Electric Bike")
+  vehicleNumber String   @default("KA-01-GC-999")
+  isOnline      Boolean  @default(true)
+  currentLat    Float    @default(12.9716)
+  currentLng    Float    @default(77.5946)
+  totalEarnings Float    @default(0.0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  deliveries Delivery[]
+}
+
+model Delivery {
+  id               String    @id @default(uuid())
+  orderId          String    @unique
+  order            Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  riderId          String
+  rider            Rider     @relation(fields: [riderId], references: [id])
+  assignedAt       DateTime  @default(now())
+  acceptedAt       DateTime?
+  pickedUpAt       DateTime?
+  deliveredAt      DateTime?
+  estimatedMinutes Int       @default(30)
+  currentLat       Float?
+  currentLng       Float?
+}
+
+model Payment {
+  id             String   @id @default(uuid())
+  orderId        String   @unique
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  amount         Float
+  method         String
+  status         String   @default("PENDING")
+  transactionRef String?
+  createdAt      DateTime @default(now())
+}
+
+model CallRecord {
+  id            String    @id @default(uuid())
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id])
+  agentId       String
+  agent         User      @relation("AgentCalls", fields: [agentId], references: [id])
+  phoneNumber   String
+  callStatus    String    @default("COMPLETED")
+  // callStatus: INCOMING | ANSWERED | MISSED | COMPLETED
+  callStartTime DateTime  @default(now())
+  callEndTime   DateTime?
+  orderId       String?   @unique
+  order         Order?    @relation(fields: [orderId], references: [id])
+  notes         String?
+  createdAt     DateTime  @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("ORDER_UPDATE")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id           String     @id @default(uuid())
+  customerId   String
+  customer     Customer   @relation(fields: [customerId], references: [id])
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  orderId      String
+  order        Order      @relation(fields: [orderId], references: [id])
+  rating       Int        @default(5)
+  comment      String?
+  createdAt    DateTime   @default(now())
+}
+
+model SupportTicket {
+  id          String   @id @default(uuid())
+  ticketNo    String   @unique
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  orderId     String?
+  order       Order?   @relation(fields: [orderId], references: [id])
+  category    String
+  subject     String
+  description String
+  status      String   @default("OPEN")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

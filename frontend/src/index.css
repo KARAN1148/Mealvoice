@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans bg-gray-50 text-gray-900;
+  }
+}
+
+/* Accessibility Mode Styles */
+body.accessibility-easy-mode {
+  font-size: 1.25rem !important;
+  line-height: 1.6 !important;
+}
+
+body.accessibility-easy-mode button,
+body.accessibility-easy-mode input,
+body.accessibility-easy-mode select {
+  font-size: 1.25rem !important;
+  min-height: 3.5rem !important;
+}
+
+body.accessibility-high-contrast {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.accessibility-high-contrast div.bg-white,
+body.accessibility-high-contrast header,
+body.accessibility-high-contrast nav,
+body.accessibility-high-contrast footer,
+body.accessibility-high-contrast card {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+body.accessibility-high-contrast button {
+  border: 2px solid #ffffff !important;
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(249, 115, 22, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
