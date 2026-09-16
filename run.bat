@@ -104,10 +104,10 @@ echo.
 :: 4. Launch Servers and Open Localhost
 echo [4/4] Launching Servers...
 echo Launching Backend API on http://localhost:5000 ...
-start "MealVoice - Backend API" /D "%~dp0backend" cmd /k npm run dev
+start "MealVoice - Backend API" /D "%~dp0backend" cmd /k npm.cmd run dev
 
 echo Launching Frontend App on http://localhost:3000 ...
-start "MealVoice - Frontend App" /D "%~dp0frontend" cmd /k npm run dev
+start "MealVoice - Frontend App" /D "%~dp0frontend" cmd /k npm.cmd run dev
 
 echo.
 echo ===================================================
@@ -116,7 +116,7 @@ echo  Opening http://localhost:3000 in your browser...
 echo ===================================================
 echo.
 
-ping 127.0.0.1 -n 4 >nul
+timeout /t 3 /nobreak >nul 2>&1
 start http://localhost:3000
 
 exit /b 0
