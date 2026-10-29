@@ -28,26 +28,26 @@ export const LandingPage: React.FC = () => {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/restaurants"
-              className="px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-lg shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5"
+              className="px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5"
             >
-              <ShoppingBag className="w-6 h-6" />
-              <span>[Order Online]</span>
+              <ShoppingBag className="w-5 h-5" />
+              <span>Order Online</span>
             </Link>
 
             <a
               href="tel:1800-472-6326"
-              className="px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5 animate-pulse-glow"
+              className="px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5"
             >
-              <PhoneCall className="w-6 h-6 text-emerald-200" />
-              <span>[Call to Order]</span>
+              <PhoneCall className="w-5 h-5 text-emerald-200 animate-pulse" />
+              <span>Call Toll-Free (1800-MEAL)</span>
             </a>
 
             <Link
               to="/easy-order"
-              className="px-8 py-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-extrabold text-lg shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5 border-2 border-amber-500"
+              className="px-8 py-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-extrabold text-base shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 hover:-translate-y-0.5 border-2 border-amber-500"
             >
-              <Sparkles className="w-6 h-6 text-amber-900" />
-              <span>[Easy Order]</span>
+              <Sparkles className="w-5 h-5 text-amber-900" />
+              <span>Easy Order Mode</span>
             </Link>
           </div>
 

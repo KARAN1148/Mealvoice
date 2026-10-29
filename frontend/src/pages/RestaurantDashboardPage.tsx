@@ -154,7 +154,7 @@ export const RestaurantDashboardPage: React.FC = () => {
                             onClick={() => handleUpdateStatus(ord.id, 'CONFIRMED')}
                             className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow transition-all"
                           >
-                            [Accept Order]
+                            Accept Order
                           </button>
                         )}
 
@@ -163,7 +163,7 @@ export const RestaurantDashboardPage: React.FC = () => {
                             onClick={() => handleUpdateStatus(ord.id, 'PREPARING')}
                             className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-amber-950 font-extrabold text-xs shadow transition-all"
                           >
-                            [Start Preparing]
+                            Start Preparing
                           </button>
                         )}
 
@@ -172,7 +172,7 @@ export const RestaurantDashboardPage: React.FC = () => {
                             onClick={() => handleUpdateStatus(ord.id, 'READY_FOR_PICKUP')}
                             className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow transition-all"
                           >
-                            [Mark Ready]
+                            Mark Ready
                           </button>
                         )}
 

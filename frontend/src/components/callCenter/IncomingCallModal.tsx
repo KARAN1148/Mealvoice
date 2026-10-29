@@ -107,10 +107,10 @@ export const IncomingCallModal: React.FC<IncomingCallModalProps> = ({
 
               <button
                 onClick={handleAnswerCall}
-                className="px-8 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black flex items-center gap-2 shadow-xl animate-pulse-glow"
+                className="px-8 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black flex items-center gap-2 shadow-xl"
               >
                 <PhoneCall className="w-5 h-5" />
-                <span>[Answer Call]</span>
+                <span>Answer Call</span>
               </button>
             </div>
           </div>

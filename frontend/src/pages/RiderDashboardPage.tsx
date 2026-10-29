@@ -135,7 +135,7 @@ export const RiderDashboardPage: React.FC = () => {
                 onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'RIDER_ACCEPTED')}
                 className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm shadow transition-all"
               >
-                [Accept & Assign Delivery]
+                Accept & Assign Delivery
               </button>
             )}
 
@@ -145,7 +145,7 @@ export const RiderDashboardPage: React.FC = () => {
                 onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'AT_RESTAURANT')}
                 className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow transition-all"
               >
-                [Arrived at Restaurant]
+                Arrived at Restaurant
               </button>
             )}
 
@@ -154,7 +154,7 @@ export const RiderDashboardPage: React.FC = () => {
                 onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'PICKED_UP')}
                 className="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow transition-all"
               >
-                [Picked Up Food]
+                Confirm Food Pickup
               </button>
             )}
 
@@ -163,16 +163,16 @@ export const RiderDashboardPage: React.FC = () => {
                 onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'OUT_FOR_DELIVERY')}
                 className="px-6 py-3 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-sm shadow transition-all"
               >
-                [Start Delivery Drive]
+                Start Delivery Drive
               </button>
             )}
 
             {activeDeliveries[0].order?.status === 'OUT_FOR_DELIVERY' && (
               <button
                 onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'DELIVERED')}
-                className="px-8 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base shadow-xl animate-pulse-glow transition-all"
+                className="px-8 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base shadow-xl transition-all"
               >
-                [Mark Delivered & Collect Payment]
+                Mark Delivered & Collect Payment
               </button>
             )}
           </div>

@@ -163,7 +163,8 @@ export const orderService = {
     await smsService.sendOrderConfirmation(
       customer.user.phone,
       order.orderNumber,
-      '30-40 mins'
+      '30-40 mins',
+      order.restaurant?.name
     );
 
     return order;

@@ -131,7 +131,7 @@ export const CustomerProfilePage: React.FC = () => {
                   className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs flex items-center gap-1 shadow"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
-                  <span>[Order Again]</span>
+                  <span>Order Again</span>
                 </button>
               </div>
             </div>

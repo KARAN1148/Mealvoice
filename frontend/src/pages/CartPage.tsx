@@ -137,7 +137,7 @@ export const CartPage: React.FC = () => {
               className="w-full py-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-extrabold text-xs flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-emerald-600" />
-              <span>[Call Instead]</span>
+              <span>Prefer to order by phone? Call 1800-MEAL</span>
             </a>
           </div>
         </div>

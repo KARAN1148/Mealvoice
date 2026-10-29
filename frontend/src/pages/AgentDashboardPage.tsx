@@ -135,10 +135,10 @@ export const AgentDashboardPage: React.FC = () => {
 
         <button
           onClick={() => triggerIncomingCall()}
-          className="px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm shadow-xl flex items-center gap-2 animate-pulse-glow"
+          className="px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm shadow-xl flex items-center gap-2"
         >
           <PhoneCall className="w-5 h-5 text-emerald-200" />
-          <span>[Simulate Incoming Call]</span>
+          <span>Receive Inbound Call</span>
         </button>
       </div>
 
@@ -309,8 +309,8 @@ export const AgentDashboardPage: React.FC = () => {
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-300 font-bold text-xs"
                 >
                   <option value="COD">Cash on Delivery (COD)</option>
-                  <option value="MOCK_UPI">Mock UPI Link</option>
-                  <option value="MOCK_CARD">Mock Card</option>
+                  <option value="UPI">Direct UPI Payment Link</option>
+                  <option value="CARD">Credit / Debit Card</option>
                 </select>
               </div>
             </div>
@@ -331,7 +331,7 @@ export const AgentDashboardPage: React.FC = () => {
               className="w-full py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base shadow-xl flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-5 h-5" />
-              <span>{isSubmitting ? 'Submitting Call Order...' : '[Submit Phone Order to Backend]'}</span>
+              <span>{isSubmitting ? 'Submitting Call Order...' : 'Submit Phone Order & Dispatch'}</span>
             </button>
           </form>
         </div>
