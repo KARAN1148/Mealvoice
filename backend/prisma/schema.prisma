@@ -172,7 +172,7 @@ model Rider {
   userId        String   @unique
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   vehicleType   String   @default("Electric Bike")
-  vehicleNumber String   @default("KA-01-GC-999")
+  vehicleNumber String   @default("KA-01-MV-999")
   isOnline      Boolean  @default(true)
   currentLat    Float    @default(12.9716)
   currentLng    Float    @default(77.5946)

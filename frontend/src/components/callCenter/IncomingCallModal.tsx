@@ -89,7 +89,7 @@ export const IncomingCallModal: React.FC<IncomingCallModalProps> = ({
               <PhoneCall className="w-12 h-12" />
             </div>
             <span className="text-xs font-extrabold px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full uppercase tracking-wider">
-              Incoming GrandConnect Phone Order Call
+              Incoming MealVoice Phone Order Call
             </span>
             <h2 className="text-3xl font-black text-gray-900 mt-2">{activeCall.phoneNumber}</h2>
             <p className="text-sm font-medium text-gray-500 mt-1">
@@ -185,7 +185,7 @@ export const IncomingCallModal: React.FC<IncomingCallModalProps> = ({
                     </div>
 
                     <p className="text-sm font-bold text-gray-900">
-                      {customerData.customer.lastOrder.restaurant?.name || 'GrandConnect Kitchen'}
+                      {customerData.customer.lastOrder.restaurant?.name || 'MealVoice Kitchen'}
                     </p>
 
                     <div className="text-xs text-gray-600 mt-1">

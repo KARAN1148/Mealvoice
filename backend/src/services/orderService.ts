@@ -32,7 +32,7 @@ export const orderService = {
     orderCounter += 1;
     const year = new Date().getFullYear();
     const formattedNum = String(orderCounter).padStart(6, '0');
-    return `GC-${year}-${formattedNum}`;
+    return `MV-${year}-${formattedNum}`;
   },
 
   createOrder: async (input: CreateOrderInput) => {

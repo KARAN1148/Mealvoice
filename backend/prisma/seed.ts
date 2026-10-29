@@ -167,7 +167,7 @@ async function main() {
       data: {
         userId: ru.id,
         vehicleType: i % 2 === 0 ? 'TVS iQube EV' : 'Hero Splendor',
-        vehicleNumber: `KA-03-GC-${1000 + i}`,
+        vehicleNumber: `KA-03-MV-${1000 + i}`,
         isOnline: true,
         totalEarnings: 1500 + i * 200
       }
@@ -492,7 +492,7 @@ async function main() {
     const deliveryFee = rest.deliveryFee;
     const tax = Math.round(subtotal * 0.05);
     const totalAmount = subtotal + deliveryFee + tax;
-    const orderNum = `GC-2026-${String(i).padStart(6, '0')}`;
+    const orderNum = `MV-2026-${String(i).padStart(6, '0')}`;
 
     const createdAt = new Date(Date.now() - Math.floor(Math.random() * 7 * 24 * 3600 * 1000));
 

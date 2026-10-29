@@ -1,8 +1,8 @@
-# GRANDCONNECT FOOD — Full-Stack Implementation Plan
+# MEALVOICE FOOD — Full-Stack Implementation Plan
 
 **Tagline**: *"Food delivery for everyone — App or Call."*
 
-GrandConnect Food is an independent food delivery platform that does **not** rely on third-party food marketplaces. It owns its restaurant network, delivery riders, customer ordering platform, order management system, delivery assignment engine, and customer support call center.
+MealVoice Food is an independent food delivery platform that does **not** rely on third-party food marketplaces. It owns its restaurant network, delivery riders, customer ordering platform, order management system, delivery assignment engine, and customer support call center.
 
 ---
 
@@ -53,7 +53,7 @@ GrandConnect Food is an independent food delivery platform that does **not** rel
   4. Specify quantity
   5. Enter delivery address
   6. Confirm order
-- **Voice Ordering Prototype**: Micro-button `[🎙 Start Voice Ordering]` utilizing Web Speech API to parse natural voice commands like *"I want two biryanis from GrandConnect Kitchen"*.
+- **Voice Ordering Prototype**: Micro-button `[🎙 Start Voice Ordering]` utilizing Web Speech API to parse natural voice commands like *"I want two biryanis from MealVoice Kitchen"*.
 - Prominent `[Call Me For Help]` and `[Call to Order]` fallbacks.
 
 ### C. Restaurant Dashboard (`/restaurant`)
@@ -100,7 +100,7 @@ GrandConnect Food is an independent food delivery platform that does **not** rel
 3. Seed data verification: Ensure 10 restaurants, 100+ menu items, customers, riders, agents, and orders populate cleanly.
 
 ### Manual / Interactive Verification
-1. **Phone Order Flow**: Log in as `CALL_AGENT` (`agent@grandconnect.demo`), simulate incoming call, create phone order, verify order number format `GC-2026-XXXXXX`, and confirm it appears in Restaurant & Admin dashboards.
+1. **Phone Order Flow**: Log in as `CALL_AGENT` (`agent@mealvoice.demo`), simulate incoming call, create phone order, verify order number format `MV-2026-XXXXXX`, and confirm it appears in Restaurant & Admin dashboards.
 2. **Easy Order & Voice Flow**: Navigate to `/easy-order`, complete the wizard, test voice input or mock fallbacks.
 3. **Restaurant & Rider Lifecycle**: Accept order as restaurant admin, mark ready, verify auto-assignment to rider, step through rider delivery steps to `DELIVERED`.
 4. **Admin Source Breakdown**: Verify accessibility impact chart renders order source percentages dynamically.
@@ -111,8 +111,8 @@ GrandConnect Food is an independent food delivery platform that does **not** rel
 
 | Role | Email | Password |
 |---|---|---|
-| Customer | `customer@grandconnect.demo` | `demo1234` |
-| Call Agent | `agent@grandconnect.demo` | `demo1234` |
-| Restaurant Admin | `restaurant@grandconnect.demo` | `demo1234` |
-| Rider | `rider@grandconnect.demo` | `demo1234` |
-| Operations Admin | `admin@grandconnect.demo` | `demo1234` |
+| Customer | `customer@mealvoice.demo` | `demo1234` |
+| Call Agent | `agent@mealvoice.demo` | `demo1234` |
+| Restaurant Admin | `restaurant@mealvoice.demo` | `demo1234` |
+| Rider | `rider@mealvoice.demo` | `demo1234` |
+| Operations Admin | `admin@mealvoice.demo` | `demo1234` |

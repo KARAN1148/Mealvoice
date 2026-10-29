@@ -77,13 +77,31 @@ The relational schema engineered via Prisma includes:
 - Node.js (v18.0.0 or higher)
 - npm (v9.0.0 or higher)
 
-### 1. Repository Setup
+### 🚀 Option A: 1-Click Launch (Windows - Recommended)
+Simply double-click or run the included `run.bat` script in the root directory:
+```cmd
+run.bat
+```
+This automated launcher will:
+1. Verify Node.js and NPM environments.
+2. Free up ports `5000` and `3000` from any lingering processes.
+3. Automatically install backend and frontend `node_modules` if not already present.
+4. Push Prisma database migrations and seed initial demo data if needed.
+5. Launch the Backend API and Frontend in separate dedicated console windows.
+6. Open your default web browser directly to `http://localhost:3000`.
+7. Allow clean, 1-key graceful shutdown of all services when finished.
+
+---
+
+### 🛠️ Option B: Manual Launch Guide
+
+#### 1. Repository Setup
 ```bash
 git clone https://github.com/KARAN1148/Mealvoice.git
 cd Mealvoice
 ```
 
-### 2. Backend Configuration & Launch
+#### 2. Backend Configuration & Launch
 ```bash
 # Navigate to backend
 cd backend
@@ -99,7 +117,7 @@ npm run seed
 npm run dev
 ```
 
-### 3. Frontend Configuration & Launch
+#### 3. Frontend Configuration & Launch
 ```bash
 # Navigate to frontend in a new terminal
 cd ../frontend
@@ -107,7 +125,7 @@ cd ../frontend
 # Install dependencies
 npm install
 
-# Start Vite Development Server (Runs on http://localhost:5173)
+# Start Vite Development Server (Runs on http://localhost:3000)
 npm run dev
 ```
 
