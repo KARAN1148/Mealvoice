@@ -131,23 +131,23 @@ export const RiderDashboardPage: React.FC = () => {
               activeDeliveries[0].order?.status === 'PENDING' ||
               activeDeliveries[0].order?.status === 'CONFIRMED' ||
               activeDeliveries[0].order?.status === 'PREPARING') && (
-              <button
-                onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'RIDER_ACCEPTED')}
-                className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm shadow transition-all"
-              >
-                Accept & Assign Delivery
-              </button>
-            )}
+                <button
+                  onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'RIDER_ACCEPTED')}
+                  className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm shadow transition-all"
+                >
+                  Accept & Assign Delivery
+                </button>
+              )}
 
             {(activeDeliveries[0].order?.status === 'RIDER_ACCEPTED' ||
               activeDeliveries[0].order?.status === 'READY_FOR_PICKUP') && (
-              <button
-                onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'AT_RESTAURANT')}
-                className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow transition-all"
-              >
-                Arrived at Restaurant
-              </button>
-            )}
+                <button
+                  onClick={() => handleUpdateStatus(activeDeliveries[0].order.id, 'AT_RESTAURANT')}
+                  className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow transition-all"
+                >
+                  Arrived at Restaurant
+                </button>
+              )}
 
             {activeDeliveries[0].order?.status === 'AT_RESTAURANT' && (
               <button
