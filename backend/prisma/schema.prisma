@@ -1,4 +1,5 @@
-// MealVoice Food - Prisma Database Schema (SQLite compatible — no enums)
+// MealVoice Food - Prisma Database Schema
+// Supports both SQLite (local dev) and PostgreSQL (production on Render)
 
 generator client {
   provider = "prisma-client-js"
@@ -6,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {

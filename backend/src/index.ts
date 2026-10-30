@@ -20,17 +20,28 @@ const prisma = new PrismaClient();
 const app = express();
 
 // ─── CORS ────────────────────────────────────────────────────────────────────
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:5173',
-  'http://localhost:4173',
-  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
-];
+const explicitOrigins = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
 
 app.use(cors({
   origin: (origin, cb) => {
-    // Allow non-browser requests (curl, Postman) and listed origins
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    // Allow non-browser requests (curl, mobile, health checks)
+    if (!origin) return cb(null, true);
+
+    const isAllowed =
+      explicitOrigins.includes('*') ||
+      explicitOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      origin.endsWith('.onrender.com') ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1');
+
+    if (isAllowed) {
+      return cb(null, true);
+    }
+
     logger.warn(`[CORS] Blocked origin: ${origin}`);
     cb(new Error(`CORS policy: origin '${origin}' is not allowed.`));
   },

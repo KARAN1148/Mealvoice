@@ -1,4 +1,5 @@
-const API_BASE = '/api';
+const envUrl = ((import.meta as any).env?.VITE_API_URL as string | undefined)?.trim();
+const API_BASE = envUrl ? `${envUrl.replace(/\/$/, '')}/api` : '/api';
 
 export async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = localStorage.getItem('gc_auth_token');
