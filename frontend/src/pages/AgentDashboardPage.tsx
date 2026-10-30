@@ -34,7 +34,8 @@ export const AgentDashboardPage: React.FC = () => {
   useEffect(() => {
     async function loadData() {
       try {
-        const rests = await apiRequest<Restaurant[]>('/restaurants');
+        const rawRests = await apiRequest<any>('/restaurants');
+        const rests: Restaurant[] = Array.isArray(rawRests) ? rawRests : (rawRests?.restaurants || []);
         setRestaurants(rests);
         if (rests.length > 0) {
           setSelectedRestaurantId(rests[0].id);

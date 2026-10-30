@@ -53,9 +53,9 @@ export const DemoToolbar: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9999] pointer-events-auto">
+    <div className="fixed bottom-3 right-3 sm:bottom-4 sm:right-4 z-40 pointer-events-auto">
       {isOpen ? (
-        <div className="bg-slate-900 text-white rounded-3xl p-5 shadow-2xl border-2 border-slate-700 w-80 sm:w-96 animate-in slide-in-from-bottom duration-200 max-h-[85vh] overflow-y-auto">
+        <div className="bg-slate-900 text-white rounded-3xl p-4 sm:p-5 shadow-2xl border-2 border-slate-700 w-[calc(100vw-1.5rem)] max-w-sm sm:w-96 animate-in slide-in-from-bottom duration-200 max-h-[85vh] overflow-y-auto">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
             <div className="flex items-center gap-2">

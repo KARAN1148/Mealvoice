@@ -60,38 +60,53 @@ export const CartPage: React.FC = () => {
           {cart.map((item) => (
             <div
               key={item.menuItem.id}
-              className="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm flex items-center justify-between gap-4"
+              className="bg-white p-4 sm:p-5 rounded-3xl border border-gray-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3.5 sm:gap-4">
                 <img
                   src={item.menuItem.imageUrl}
                   alt={item.menuItem.name}
-                  className="w-16 h-16 rounded-2xl object-cover shrink-0"
+                  className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-gray-100"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=150&q=80';
+                  }}
                 />
-                <div>
-                  <h3 className="font-extrabold text-base text-gray-900">{item.menuItem.name}</h3>
-                  <div className="text-sm font-bold text-gray-700">₹{item.menuItem.price}</div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-extrabold text-base text-gray-900 truncate">{item.menuItem.name}</h3>
+                  <div className="text-sm font-bold text-gray-600 mt-0.5">₹{item.menuItem.price} each</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                 <div className="flex items-center gap-3 bg-gray-100 px-3 py-1.5 rounded-xl font-extrabold border border-gray-200">
-                  <button onClick={() => updateQuantity(item.menuItem.id, -1)}>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.menuItem.id, -1)}
+                    className="p-1 hover:text-brand-600"
+                    aria-label="Decrease quantity"
+                  >
                     <Minus className="w-4 h-4 text-gray-600" />
                   </button>
-                  <span className="text-sm font-bold text-gray-900">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.menuItem.id, 1)}>
+                  <span className="text-sm font-bold text-gray-900 min-w-[20px] text-center">{item.quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.menuItem.id, 1)}
+                    className="p-1 hover:text-brand-600"
+                    aria-label="Increase quantity"
+                  >
                     <Plus className="w-4 h-4 text-gray-600" />
                   </button>
                 </div>
 
-                <div className="text-right font-black text-gray-900 w-16">
+                <div className="text-right font-black text-gray-900 w-16 text-base">
                   ₹{item.menuItem.price * item.quantity}
                 </div>
 
                 <button
+                  type="button"
                   onClick={() => removeFromCart(item.menuItem.id)}
-                  className="text-gray-400 hover:text-red-600"
+                  className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                  aria-label="Remove item"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>

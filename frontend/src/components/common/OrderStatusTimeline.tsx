@@ -58,7 +58,7 @@ export const OrderStatusTimeline: React.FC<TimelineProps> = ({ currentStatus }) 
           return (
             <div key={idx} className="relative z-10 flex flex-col items-center group">
               <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center border-4 font-bold transition-all ${
+                className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 sm:border-4 font-bold transition-all ${
                   state === 'completed'
                     ? 'bg-emerald-600 border-emerald-200 text-white shadow-md'
                     : state === 'active'
@@ -66,10 +66,10 @@ export const OrderStatusTimeline: React.FC<TimelineProps> = ({ currentStatus }) 
                     : 'bg-white border-gray-300 text-gray-400'
                 }`}
               >
-                {state === 'completed' ? <CheckCircle2 className="w-6 h-6" /> : <Icon className="w-5 h-5" />}
+                {state === 'completed' ? <CheckCircle2 className="w-4 h-4 sm:w-6 sm:h-6" /> : <Icon className="w-3.5 h-3.5 sm:w-5 sm:h-5" />}
               </div>
               <span
-                className={`mt-2 text-xs font-bold text-center max-w-[80px] ${
+                className={`mt-1.5 sm:mt-2 text-[9px] sm:text-xs font-bold text-center leading-tight max-w-[52px] sm:max-w-[80px] ${
                   state === 'active'
                     ? 'text-brand-600 font-extrabold scale-105'
                     : state === 'completed'

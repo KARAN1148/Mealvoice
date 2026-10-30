@@ -80,8 +80,8 @@ export const IncomingCallModal: React.FC<IncomingCallModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border-4 border-emerald-500 animate-in zoom-in-95">
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border-4 border-emerald-500 animate-in zoom-in-95 max-h-[90vh] overflow-y-auto">
         {/* Ringing Banner */}
         {callState === 'RINGING' && (
           <div className="text-center py-6">

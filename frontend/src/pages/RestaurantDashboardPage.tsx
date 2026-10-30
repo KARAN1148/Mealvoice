@@ -12,10 +12,12 @@ export const RestaurantDashboardPage: React.FC = () => {
 
   const fetchOrders = async () => {
     try {
-      const data = await apiRequest<Order[]>('/restaurants/orders');
-      setOrders(data);
+      const data = await apiRequest<any>('/restaurants/orders');
+      const orderList: Order[] = Array.isArray(data) ? data : (data?.orders || []);
+      setOrders(orderList);
     } catch (err) {
       console.error('Failed to load restaurant orders', err);
+      setOrders([]);
     } finally {
       setLoading(false);
     }
@@ -35,17 +37,18 @@ export const RestaurantDashboardPage: React.FC = () => {
       });
 
       showNotification(`Order status updated to ${newStatus.replace(/_/g, ' ')}`);
-      setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o)));
+      setOrders((prev) => (Array.isArray(prev) ? prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o)) : []));
     } catch (err: any) {
       alert(err.message || 'Status update failed');
     }
   };
 
-  const newOrders = orders.filter((o) => o.status === 'PENDING');
-  const preparingOrders = orders.filter((o) => o.status === 'CONFIRMED' || o.status === 'PREPARING');
-  const readyOrders = orders.filter((o) => o.status === 'READY_FOR_PICKUP' || o.status === 'ASSIGNED');
-  const completedOrders = orders.filter((o) => o.status === 'DELIVERED');
-  const totalRevenue = orders.reduce((sum, o) => sum + (o.status !== 'CANCELLED' ? o.totalAmount : 0), 0);
+  const safeOrders = Array.isArray(orders) ? orders : [];
+  const newOrders = safeOrders.filter((o) => o.status === 'PENDING');
+  const preparingOrders = safeOrders.filter((o) => o.status === 'CONFIRMED' || o.status === 'PREPARING');
+  const readyOrders = safeOrders.filter((o) => o.status === 'READY_FOR_PICKUP' || o.status === 'ASSIGNED');
+  const completedOrders = safeOrders.filter((o) => o.status === 'DELIVERED');
+  const totalRevenue = safeOrders.reduce((sum, o) => sum + (o.status !== 'CANCELLED' ? o.totalAmount : 0), 0);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -124,7 +127,7 @@ export const RestaurantDashboardPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 font-semibold">
-                {orders.map((ord) => (
+                {safeOrders.map((ord) => (
                   <tr key={ord.id} className="hover:bg-gray-50/80 transition-colors">
                     <td className="p-4 font-black text-gray-900">{ord.orderNumber}</td>
                     <td className="p-4">

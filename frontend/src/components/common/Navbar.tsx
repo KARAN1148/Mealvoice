@@ -221,10 +221,10 @@ const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold hover:bg-brand-700 transition-colors shadow-md flex items-center gap-1.5 text-sm"
+                className="px-2.5 sm:px-4 py-2 rounded-xl bg-brand-600 text-white font-bold hover:bg-brand-700 transition-colors shadow-md flex items-center gap-1 text-xs sm:text-sm shrink-0"
               >
                 <UserIcon className="w-4 h-4" />
-                Sign In
+                <span>Sign In</span>
               </Link>
             )}
 
@@ -243,23 +243,46 @@ const Navbar: React.FC = () => {
       {/* ── Mobile Menu ────────────────────────────────────────────────────── */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white px-4 pb-5 pt-3 space-y-1 shadow-xl animate-in slide-in-from-top-2">
-          <Link to="/restaurants" className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-gray-800 hover:bg-gray-50">
+          {user && (
+            <div className="p-3 bg-brand-50 border border-brand-200 rounded-2xl mb-2 flex items-center justify-between">
+              <div>
+                <div className="font-extrabold text-sm text-gray-900">{user.name}</div>
+                <div className="text-[11px] font-bold text-brand-700">{user.role.replace(/_/g, ' ')}</div>
+              </div>
+              {myDash && (
+                <Link
+                  to={myDash.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold text-white ${myDash.cls} shadow`}
+                >
+                  {myDash.label}
+                </Link>
+              )}
+            </div>
+          )}
+
+          <Link to="/restaurants" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-gray-800 hover:bg-gray-50">
             🍽️ Restaurants
           </Link>
-          <Link to="/easy-order" className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-amber-900 bg-amber-50 border border-amber-200">
+          <Link to="/easy-order" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-amber-900 bg-amber-50 border border-amber-200">
             <Sparkles className="w-4 h-4 text-amber-500" /> Easy Order Mode
           </Link>
           <a href="tel:18004726326" className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-green-800 hover:bg-green-50">
             <PhoneCall className="w-4 h-4 text-green-600 animate-pulse" /> Call 1800-MEALVOICE
           </a>
-          <Link to="/support" className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-gray-800 hover:bg-gray-50">
+          {user?.role === 'CUSTOMER' && (
+            <Link to="/profile" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-gray-800 hover:bg-gray-50">
+              <UserIcon className="w-4 h-4 text-gray-400" /> My Orders & Profile
+            </Link>
+          )}
+          <Link to="/support" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-gray-800 hover:bg-gray-50">
             <HelpCircle className="w-4 h-4 text-gray-400" /> Support
           </Link>
 
           <div className="border-t border-gray-100 pt-2 mt-2 space-y-1">
-            <p className="text-[10px] font-extrabold text-gray-400 uppercase px-3 pb-1">Staff Dashboards</p>
+            <p className="text-[10px] font-extrabold text-gray-400 uppercase px-3 pb-1">All Dashboards</p>
             {dashLinks.map(d => (
-              <Link key={d.to} to={d.to} className="flex items-center gap-3 px-3 py-2 rounded-xl font-bold text-xs text-gray-700 hover:bg-gray-50">
+              <Link key={d.to} to={d.to} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-xl font-bold text-xs text-gray-700 hover:bg-gray-50">
                 <span>{d.icon}</span> {d.label}
               </Link>
             ))}
@@ -268,10 +291,10 @@ const Navbar: React.FC = () => {
           {user && (
             <div className="border-t border-gray-100 pt-2 mt-2">
               <button
-                onClick={logout}
+                onClick={() => { logout(); setMobileOpen(false); }}
                 className="w-full flex items-center gap-3 px-3 py-3 rounded-xl font-bold text-sm text-red-600 hover:bg-red-50"
               >
-                <LogOut className="w-4 h-4" /> Sign Out ({user.name})
+                <LogOut className="w-4 h-4" /> Sign Out
               </button>
             </div>
           )}

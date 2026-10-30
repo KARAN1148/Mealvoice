@@ -276,46 +276,48 @@ export const OrderTrackingPage: React.FC = () => {
             </div>
 
             {/* Table */}
-            <table className="w-full text-xs text-left">
-              <thead>
-                <tr className="border-y border-gray-300 font-extrabold uppercase text-gray-700 bg-gray-50">
-                  <th className="py-2.5 px-2">Description</th>
-                  <th className="py-2.5 px-2 text-center">HSN/SAC</th>
-                  <th className="py-2.5 px-2 text-center">Qty</th>
-                  <th className="py-2.5 px-2 text-right">Rate</th>
-                  <th className="py-2.5 px-2 text-right">Amount</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 font-medium">
-                {order.items?.map((item) => (
-                  <tr key={item.id}>
-                    <td className="py-2 px-2 font-bold text-gray-900">{item.name}</td>
-                    <td className="py-2 px-2 text-center font-mono text-gray-500">996331</td>
-                    <td className="py-2 px-2 text-center">{item.quantity}</td>
-                    <td className="py-2 px-2 text-right">₹{item.price}</td>
-                    <td className="py-2 px-2 text-right font-bold text-gray-900">₹{item.price * item.quantity}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[460px] text-xs text-left">
+                <thead>
+                  <tr className="border-y border-gray-300 font-extrabold uppercase text-gray-700 bg-gray-50">
+                    <th className="py-2.5 px-2">Description</th>
+                    <th className="py-2.5 px-2 text-center">HSN/SAC</th>
+                    <th className="py-2.5 px-2 text-center">Qty</th>
+                    <th className="py-2.5 px-2 text-right">Rate</th>
+                    <th className="py-2.5 px-2 text-right">Amount</th>
                   </tr>
-                ))}
-                <tr>
-                  <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>Delivery & Packaging Charges (SAC 996812)</td>
-                  <td className="py-2 px-2 text-right font-bold text-gray-900">₹{deliveryFee}</td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>CGST @ 2.5%</td>
-                  <td className="py-2 px-2 text-right font-bold text-gray-900">₹{Math.round(tax / 2)}</td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>SGST @ 2.5%</td>
-                  <td className="py-2 px-2 text-right font-bold text-gray-900">₹{Math.round(tax / 2)}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr className="border-t-2 border-gray-900 text-sm font-black text-gray-900">
-                  <td className="py-3 px-2" colSpan={4}>Total Amount (Inclusive of all taxes)</td>
-                  <td className="py-3 px-2 text-right text-brand-600">₹{total}</td>
-                </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100 font-medium">
+                  {order.items?.map((item) => (
+                    <tr key={item.id}>
+                      <td className="py-2 px-2 font-bold text-gray-900">{item.name}</td>
+                      <td className="py-2 px-2 text-center font-mono text-gray-500">996331</td>
+                      <td className="py-2 px-2 text-center">{item.quantity}</td>
+                      <td className="py-2 px-2 text-right">₹{item.price}</td>
+                      <td className="py-2 px-2 text-right font-bold text-gray-900">₹{item.price * item.quantity}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>Delivery & Packaging Charges (SAC 996812)</td>
+                    <td className="py-2 px-2 text-right font-bold text-gray-900">₹{deliveryFee}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>CGST @ 2.5%</td>
+                    <td className="py-2 px-2 text-right font-bold text-gray-900">₹{Math.round(tax / 2)}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-2 text-gray-600 font-semibold" colSpan={4}>SGST @ 2.5%</td>
+                    <td className="py-2 px-2 text-right font-bold text-gray-900">₹{Math.round(tax / 2)}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr className="border-t-2 border-gray-900 text-sm font-black text-gray-900">
+                    <td className="py-3 px-2" colSpan={4}>Total Amount (Inclusive of all taxes)</td>
+                    <td className="py-3 px-2 text-right text-brand-600">₹{total}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
 
             <div className="pt-4 border-t border-gray-200 flex justify-between items-center text-xs text-gray-500 print:hidden">
               <span className="flex items-center gap-1.5">
