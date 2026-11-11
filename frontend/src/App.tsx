@@ -11,6 +11,7 @@ import DemoToolbar from './components/common/DemoToolbar';
 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
+import AuthCallback from './pages/AuthCallback';
 import RestaurantListPage from './pages/RestaurantListPage';
 import RestaurantDetailPage from './pages/RestaurantDetailPage';
 import CartPage from './pages/CartPage';
@@ -130,6 +131,7 @@ const AppRoutes: React.FC = () => {
         {/* Public Customer Routes */}
         <Route path="/" element={<CustomerLayout><LandingPage /></CustomerLayout>} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/restaurants" element={<CustomerLayout><RestaurantListPage /></CustomerLayout>} />
         <Route path="/restaurant/:id" element={<CustomerLayout><RestaurantDetailPage /></CustomerLayout>} />
         <Route path="/cart" element={<CustomerLayout><CartPage /></CustomerLayout>} />
